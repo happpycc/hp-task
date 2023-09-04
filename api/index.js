@@ -1,7 +1,8 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
-import route from "./route.js";
+import groupRoute from "./routes/groupRoute.js";
+import taskRoute from "./routes/taskRoute.js";
 import cors from "cors";
 
 dotenv.config();
@@ -12,7 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.use(route);
+app.use(groupRoute);
+app.use(taskRoute);
 
 // connect to mongodb
 mongoose
