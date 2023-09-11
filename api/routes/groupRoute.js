@@ -4,6 +4,7 @@ import {
   addGroup,
   getGroup,
   updateGroupName,
+  getGroups,
 } from "../controllers/groupController.js";
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router
   .delete(deleteGroup)
   .put(updateGroupName);
 router.route("/group").post(addGroup);
+router.route("/groups").get(getGroups);
 
 export default router;

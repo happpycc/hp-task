@@ -10,9 +10,18 @@ const vertifyName = (name) => {
   return false;
 };
 
+export const getGroups = async (_, res) => {
+  await GroupModel.find({}, { tasks: 0 })
+    .sort({ update_time: -1 })
+    .then((groups) => res.json(groups))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Server error");
+    });
+};
+
 export const getGroup = async (req, res) => {
   await GroupModel.findById(req.params.id)
-    .sort({ update_time: -1 })
     .then((group) => res.json(group))
     .catch((err) => {
       console.log(err);

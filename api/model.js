@@ -2,15 +2,23 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
-const TaskSchema = new Schema({
-  content: { type: String, required: true },
-  state: {
-    type: String,
-    required: true,
-    enum: ["done", "todo", "abandon"],
-    default: "todo",
+const TaskSchema = new Schema(
+  {
+    content: { type: String, required: true },
+    state: {
+      type: String,
+      required: true,
+      enum: ["done", "todo", "abandon"],
+      default: "todo",
+    },
   },
-});
+  {
+    timestamps: {
+      createdAt: false,
+      updatedAt: "update_time",
+    },
+  },
+);
 
 const GroupSchema = new Schema(
   {
