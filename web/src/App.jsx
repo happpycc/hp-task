@@ -3,7 +3,7 @@ import axios from "axios";
 import { TaskContextProvider } from "./Task/Contexts/TaskContext";
 
 const App = () => {
-  axios.defaults.baseURL = "http://192.168.102.42:5556";
+  axios.defaults.baseURL = "http://192.168.1.11:5556";
   return (
     <TaskContextProvider>
       <Task />

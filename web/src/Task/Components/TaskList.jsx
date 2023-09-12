@@ -4,7 +4,6 @@ import TaskItem from "./TaskItem";
 
 const TaskList = () => {
   const { group, groups } = useContext(TaskContext);
-  console.log(group.tasks);
   if (groups.length === 0)
     return (
       <div className="h-full mx-2 mb-2 rounded-lg p-2 bg-[#040D12]">None</div>
