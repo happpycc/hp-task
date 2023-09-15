@@ -33,10 +33,10 @@ export default function GroupList() {
         }}
       >
         <div
-          className="border p-2 bg-blue-900 flex flex-col gap-1 overflow-y-scroll h-max-2/3"
+          className="border p-2 bg-blue-900 flex flex-col gap-1 h-2/3 justify-between"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col p-1 gap-2">
+          <div className="flex flex-col p-1 gap-2 overflow-y-scroll no-scrollbar">
             {groups.map((group) => {
               return (
                 <div key={group._id} className="border p-1">

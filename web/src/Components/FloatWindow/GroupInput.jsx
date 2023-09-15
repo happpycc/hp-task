@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DataContext } from "../../Contexts/DataContext";
 
-export default function GroupInput() {
+export default function InputWindow() {
   const { groupInputMode, setGroupInputMode } = useContext(DataContext);
   if (groupInputMode)
     return (

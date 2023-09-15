@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { DataContext } from "../../Contexts/DataContext";
 
 export default function TaskInput() {
-  const { groupInputMode, setGroupInputMode } = useContext(DataContext);
-  if (groupInputMode)
+  const { taskInputMode, setTaskInputMode } = useContext(DataContext);
+  if (taskInputMode)
     return (
       <div
         className="absolute right-0 left-0 bottom-0 top-0 m-auto w-full h-full bg-transparent flex justify-center items-center"
         onClick={() => {
-          setGroupInputMode(false);
+          setTaskInputMode(false);
         }}
       >
         <div

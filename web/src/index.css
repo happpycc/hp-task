@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .m-scrollbar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .m-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px 10px green;
+    border: solid 3px transparent;
+  }
+
+  .m-scrollbar::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 10px 10px red;
+    border: solid 3px transparent;
+  }
+}
