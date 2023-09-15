@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { TaskContext } from "../Contexts/TaskContext";
+import { DataContext } from "../Contexts/DataContext";
 import TaskItem from "./TaskItem";
 
 const TaskList = () => {
-  const { group, groups } = useContext(TaskContext);
+  const { group, groups } = useContext(DataContext);
   if (groups.length === 0)
     return (
       <div className="h-full mx-2 mb-2 rounded-lg p-2 bg-[#040D12]">None</div>

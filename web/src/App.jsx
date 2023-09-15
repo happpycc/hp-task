@@ -1,13 +1,13 @@
-import Task from "./Task/Components/Task";
+import Layout from "./Components/Layout";
 import axios from "axios";
-import { TaskContextProvider } from "./Task/Contexts/TaskContext";
+import { DataContextProvider } from "./Contexts/DataContext";
 
 const App = () => {
   axios.defaults.baseURL = "http://192.168.1.11:5556";
   return (
-    <TaskContextProvider>
-      <Task />
-    </TaskContextProvider>
+    <DataContextProvider>
+      <Layout />
+    </DataContextProvider>
   );
 };
 
