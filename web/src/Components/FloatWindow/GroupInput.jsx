@@ -2,7 +2,15 @@ import { useContext } from "react";
 import { DataContext } from "../../Contexts/DataContext";
 
 export default function InputWindow() {
-  const { groupInputMode, setGroupInputMode } = useContext(DataContext);
+  const {
+    groupInput,
+    setGroupInput,
+    groupInputMode,
+    setGroupInputMode,
+    add_group,
+    update_group,
+    groupHandleMode,
+  } = useContext(DataContext);
   if (groupInputMode)
     return (
       <div
@@ -12,10 +20,24 @@ export default function InputWindow() {
         }}
       >
         <div
-          className="border p-2 overflow-y-scroll no-scrollbar h-max-2/3 w-auto bg-blue-900"
+          className="border p-2 overflow-y-scroll no-scrollbar w-auto bg-blue-900 flex flex-col gap-2"
           onClick={(e) => e.stopPropagation()}
         >
-          <textarea></textarea>
+          <input
+            className="outline-none resize-none p-1"
+            value={groupInput}
+            onChange={(e) => setGroupInput(e.target.value)}
+          />
+          <button
+            className="border w-full"
+            onClick={async () => {
+              groupHandleMode ? await add_group() : await update_group();
+              setGroupInput("");
+              setGroupInputMode(false);
+            }}
+          >
+            {groupHandleMode ? "Add" : "Update"}
+          </button>
         </div>
       </div>
     );

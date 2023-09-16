@@ -5,12 +5,15 @@ import { DataContext } from "../../Contexts/DataContext";
 
 export default function GroupList() {
   const {
+    setGroupInput,
     get_group,
+    delete_group,
     groups,
     setGroups,
     groupListMode,
     setGroupListMode,
     setGroupInputMode,
+    setGroupHandleMode,
   } = useContext(DataContext);
   useEffect(() => {
     axios
@@ -54,19 +57,33 @@ export default function GroupList() {
                       <button
                         onClick={() => {
                           setGroupListMode(false);
+                          setGroupInput(group.name);
+                          setGroupHandleMode(false);
                           setGroupInputMode(true);
                         }}
                       >
                         Edit
                       </button>
-                      <button>Delete</button>
+                      <button onClick={() => delete_group(group._id)}>
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>
               );
             })}
           </div>
-          <button className="border p-1 mx-1">Add</button>
+          <button
+            className="border p-1 mx-1"
+            onClick={() => {
+              setGroupListMode(false);
+              setGroupInput("");
+              setGroupHandleMode(true);
+              setGroupInputMode(true);
+            }}
+          >
+            Add
+          </button>
         </div>
       </div>
     );
