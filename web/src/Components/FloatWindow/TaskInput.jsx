@@ -1,14 +1,14 @@
 import { useContext } from "react";
-import { DataContext } from "../../Contexts/DataContext";
+import { ModeContext } from "../../Contexts/ModeContext";
 
 export default function TaskInput() {
-  const { taskInputMode, setTaskInputMode } = useContext(DataContext);
+  const { taskInputMode, show_window } = useContext(ModeContext);
   if (taskInputMode)
     return (
       <div
         className="absolute right-0 left-0 bottom-0 top-0 m-auto w-full h-full bg-transparent flex justify-center items-center"
         onClick={() => {
-          setTaskInputMode(false);
+          show_window();
         }}
       >
         <div

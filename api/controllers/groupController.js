@@ -62,16 +62,12 @@ export const updateGroupName = async (req, res) => {
   if (vertifyName(name)) {
     return res.status(400).send("Server error");
   }
-  await GroupModel.updateOne(
-    { _id: req.params.id },
-    {
-      $set: {
-        name,
-      },
-    },
-  )
-    .then(() => {
-      res.status(200).send({ update_time, name });
+  await GroupModel.findByIdAndUpdate(req.params.id, { name })
+    .then((group) => {
+      group.name = name;
+      group.update_time = update_time;
+      group.tasks = undefined;
+      res.status(200).send(group);
     })
     .catch((err) => {
       console.log(err);

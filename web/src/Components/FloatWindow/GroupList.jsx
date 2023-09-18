@@ -1,20 +1,14 @@
 import axios from "axios";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { DataContext } from "../../Contexts/DataContext";
+import { GroupContext } from "../../Contexts/GroupContext";
+import { ModeContext } from "../../Contexts/ModeContext";
 
 export default function GroupList() {
-  const {
-    setGroupInput,
-    get_group,
-    delete_group,
-    groups,
-    setGroups,
-    groupListMode,
-    setGroupListMode,
-    setGroupInputMode,
-    setGroupHandleMode,
-  } = useContext(DataContext);
+  const { setGroupClick, groups, setGroups, get_group, delete_group } =
+    useContext(GroupContext);
+  const { groupListMode, setGroupHandleMode, show_window } =
+    useContext(ModeContext);
   useEffect(() => {
     axios
       .get("/groups")
@@ -27,13 +21,25 @@ export default function GroupList() {
         console.log(err);
       });
   }, [groupListMode]);
+  useEffect(() => {
+    groups.length === 0 &&
+      show_window({
+        group_list: false,
+        group_input: false,
+        task_input: false,
+      });
+  }, [groups]);
   if (groupListMode)
     return (
       <div
         className="absolute right-0 left-0 bottom-0 top-0 m-auto w-full h-full bg-transparent flex justify-center items-center"
-        onClick={() => {
-          setGroupListMode(false);
-        }}
+        onClick={() =>
+          show_window({
+            group_list: false,
+            group_input: false,
+            task_input: false,
+          })
+        }
       >
         <div
           className="border p-2 bg-blue-900 flex flex-col gap-1 h-2/3 justify-between"
@@ -48,7 +54,11 @@ export default function GroupList() {
                       onClick={async () => {
                         await get_group(group._id);
                         localStorage.setItem("group_id", group._id);
-                        setGroupListMode(false);
+                        show_window({
+                          group_list: false,
+                          group_input: false,
+                          task_input: false,
+                        });
                       }}
                     >
                       {group.name}
@@ -56,10 +66,14 @@ export default function GroupList() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
-                          setGroupListMode(false);
-                          setGroupInput(group.name);
+                          console.log(group._id);
+                          setGroupClick({ name: group.name, _id: group._id });
                           setGroupHandleMode(false);
-                          setGroupInputMode(true);
+                          show_window({
+                            group_list: false,
+                            group_input: true,
+                            task_input: false,
+                          });
                         }}
                       >
                         Edit
@@ -76,10 +90,13 @@ export default function GroupList() {
           <button
             className="border p-1 mx-1"
             onClick={() => {
-              setGroupListMode(false);
-              setGroupInput("");
+              setGroupClick({ name: "", _id: "" });
               setGroupHandleMode(true);
-              setGroupInputMode(true);
+              show_window({
+                group_list: false,
+                group_input: true,
+                task_input: false,
+              });
             }}
           >
             Add

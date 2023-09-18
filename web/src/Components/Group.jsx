@@ -1,23 +1,22 @@
 import { useContext } from "react";
-import { DataContext } from "../Contexts/DataContext";
+import { GroupContext } from "../Contexts/GroupContext";
+import { ModeContext } from "../Contexts/ModeContext";
 
 const TaskGroup = () => {
-  const {
-    group,
-    groups,
-    setGroupListMode,
-    setGroupInputMode,
-    setGroupHandleMode,
-    setGroupInput,
-  } = useContext(DataContext);
+  const { group, groups, setGroupClick } = useContext(GroupContext);
+  const { show_window, setGroupHandleMode } = useContext(ModeContext);
   return (
     <>
       {groups.length === 0 && (
         <div
           onClick={() => {
-            setGroupInputMode(true);
-            setGroupInput("");
-            setGroupHandleMode(true); // true ===> POST; false ===> PUT
+            setGroupClick({ name: "" });
+            show_window({
+              group_list: false,
+              group_input: true,
+              task_input: false,
+            });
+            setGroupHandleMode(true);
           }}
           className="bg-blue-300 mx-2 mt-2 rounded-lg border-black p-2"
         >
@@ -26,7 +25,13 @@ const TaskGroup = () => {
       )}
       {groups.length !== 0 && (
         <div
-          onClick={() => setGroupListMode(true)}
+          onClick={() =>
+            show_window({
+              group_list: true,
+              group_input: false,
+              task_input: false,
+            })
+          }
           className="bg-blue-300 mx-2 mt-2 rounded-lg border-black p-2"
         >
           {group.name}
