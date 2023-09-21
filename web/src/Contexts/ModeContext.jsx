@@ -5,6 +5,7 @@ export const ModeContext = createContext({});
 
 export function ModeContextProvider({ children }) {
   const [groupHandleMode, setGroupHandleMode] = useState(false); // true ===> POST; false ===> PUT
+  const [taskHandleMode, setTaskHandleMode] = useState(false); // true ===> POST; false ===> PUT
   const [groupInputMode, setGroupInputMode] = useState(false);
   const [taskInputMode, setTaskInputMode] = useState(false);
   const [groupListMode, setGroupListMode] = useState(false);
@@ -26,6 +27,9 @@ export function ModeContextProvider({ children }) {
         setTaskInputMode,
         groupListMode,
         setGroupListMode,
+
+        taskHandleMode,
+        setTaskHandleMode,
       }}
     >
       {children}
