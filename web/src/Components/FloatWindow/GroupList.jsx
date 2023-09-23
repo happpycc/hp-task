@@ -21,14 +21,6 @@ export default function GroupList() {
         console.log(err);
       });
   }, [groupListMode]);
-  useEffect(() => {
-    groups.length === 0 &&
-      show_window({
-        group_list: false,
-        group_input: false,
-        task_input: false,
-      });
-  }, [groups]);
   if (groupListMode)
     return (
       <div

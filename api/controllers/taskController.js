@@ -85,6 +85,7 @@ export const updateTaskPosition = async (req, res) => {
       $position: position,
     });
     await GroupDoc.save();
+    console.log(GroupDoc.tasks[position]);
     res.status(200).json(GroupDoc.tasks[position]);
   } catch (e) {
     console.log(e);

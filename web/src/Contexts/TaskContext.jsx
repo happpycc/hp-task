@@ -11,26 +11,36 @@ export function TaskContextProvider({ children }) {
   const [taskClick, setTaskClick] = useState({
     id: "",
     content: "",
+    position: 0,
   });
   const [taskUpdateText, setUpdateText] = useState("");
+  const update_groups = (update_time) => {
+    setGroups((_groups) => {
+      _groups = _groups.filter((_group) => _group._id !== group._id);
+      return [
+        {
+          ...group,
+          tasks: undefined,
+          update_time: update_time,
+        },
+        ..._groups,
+      ];
+    });
+  };
   const add_task = async () => {
     await axios
       .post(`/task/${group._id}`, {
         content: taskClick.content,
-        position: group.tasks.length,
+        position: taskClick.position,
       })
       .then((res) => {
         if (res.status === 200) {
           setGroup((_group) => {
-            _group.tasks.push(res.data);
+            _group.tasks.splice(taskClick.position, 0, res.data);
+            _group.update_time = res.data.update_time;
             return { ..._group };
           });
-          setGroups((_groups) => {
-            _groups = _groups.filter((_group) => _group._id !== group._id);
-            const _group = group;
-            _group.tasks = undefined;
-            return [_group, ..._groups];
-          });
+          update_groups(res.data.update_time);
         }
       })
       .catch((err) => {
@@ -39,6 +49,27 @@ export function TaskContextProvider({ children }) {
   };
   const delete_task = () => {};
   const update_task = () => {};
+  const update_position = async (old_index, new_index, id) => {
+    await axios
+      .put(`/task/position/${group._id}`, {
+        id: id,
+        position: new_index,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setGroup((_group) => {
+            _group.tasks.splice(new_index, 0, res.data);
+            _group.tasks.splice(old_index, 1);
+            _group.update_time = res.data.update_time;
+            return { ..._group };
+          });
+          update_groups(res.data.update_time);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const get_task = () => {};
   return (
     <TaskContext.Provider
@@ -46,6 +77,7 @@ export function TaskContextProvider({ children }) {
         add_task,
         delete_task,
         update_task,
+        update_position,
         get_task,
 
         taskClick,

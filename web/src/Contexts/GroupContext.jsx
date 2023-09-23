@@ -34,8 +34,6 @@ export function GroupContextProvider({ children }) {
       });
   };
   const update_group = async () => {
-    console.log(groupClick.name);
-    console.log(groupClick._id);
     await axios
       .put(`/group/${groupClick._id}`, { name: groupClick.name })
       .then((res) => {
