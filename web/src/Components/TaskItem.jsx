@@ -11,11 +11,7 @@ const TaskItem = ({ index, task }) => {
     <div className="w-full flex justify-around border">
       <div className="flex flex-col">
         {index !== 0 && (
-          <button
-            onClick={() =>
-              update_position(index + 1, index === 0 ? 0 : index - 1, task._id)
-            }
-          >
+          <button onClick={() => update_position(index, index - 1, task._id)}>
             ++
           </button>
         )}

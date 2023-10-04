@@ -58,10 +58,9 @@ export function TaskContextProvider({ children }) {
       .then((res) => {
         if (res.status === 200) {
           setGroup((_group) => {
-            _group.tasks.splice(new_index, 0, res.data);
-            _group.tasks.splice(old_index, 1);
-            _group.update_time = res.data.update_time;
-            return { ..._group };
+            let tasks = [...group.tasks];
+            tasks[old_index] = tasks.splice(new_index, 1, tasks[old_index])[0];
+            return { ..._group, update_time: res.data.update_time, tasks };
           });
           update_groups(res.data.update_time);
         }
