@@ -18,7 +18,7 @@ const TaskGroup = () => {
             });
             setGroupHandleMode(true);
           }}
-          className="bg-blue-300 mx-2 mt-2 rounded-lg border-black p-2"
+          className="bg-blue-300 mx-2 mt-2 rounded-lg p-2"
         >
           Click me to add a group.
         </div>
@@ -32,7 +32,7 @@ const TaskGroup = () => {
               task_input: false,
             })
           }
-          className="bg-blue-300 mx-2 mt-2 rounded-lg border-black p-2"
+          className="bg-[#395B64] mx-2 mt-2 rounded-lg p-2"
         >
           {group.name}
         </div>

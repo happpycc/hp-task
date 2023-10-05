@@ -25,3 +25,7 @@
     border: solid 3px transparent;
   }
 }
+@font-face {
+  font-family: "zpix";
+  src: url("../fonts/zpix.ttf");
+}

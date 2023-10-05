@@ -6,7 +6,7 @@ import TaskInput from "./FloatWindow/TaskInput";
 
 const Task = () => {
   return (
-    <div className="h-screen flex justify-center items-center font-zpix">
+    <div className="h-screen flex justify-center items-center font-zpix text-2xl">
       <GroupList />
       <GroupInput />
       <TaskInput />

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { GroupContext } from "../../Contexts/GroupContext";
 import { ModeContext } from "../../Contexts/ModeContext";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 
 export default function GroupList() {
   const { setGroupClick, groups, setGroups, get_group, delete_group } =
@@ -34,15 +35,16 @@ export default function GroupList() {
         }
       >
         <div
-          className="border p-2 bg-blue-900 flex flex-col gap-1 h-2/3 justify-between"
+          className="p-3 bg-[#321F28] flex flex-col gap-1 h-2/3 w-2/3 justify-between rounded-lg items-center"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col p-1 gap-2 overflow-y-scroll no-scrollbar">
+          <div className="flex flex-col gap-2 overflow-y-scroll no-scrollbar w-full">
             {groups.map((group) => {
               return (
-                <div key={group._id} className="border p-1">
+                <div key={group._id} className="p-2 rounded-lg bg-[#B4A5A5]">
                   <div className="flex gap-1 justify-between">
                     <div
+                      className="mr-3 text-[#5C3D2E] overflow-x-auto"
                       onClick={async () => {
                         await get_group(group._id);
                         localStorage.setItem("group_id", group._id);
@@ -55,10 +57,9 @@ export default function GroupList() {
                     >
                       {group.name}
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <button
                         onClick={() => {
-                          console.log(group._id);
                           setGroupClick({ name: group.name, _id: group._id });
                           setGroupHandleMode(false);
                           show_window({
@@ -68,10 +69,10 @@ export default function GroupList() {
                           });
                         }}
                       >
-                        Edit
+                        <PencilSquareIcon className="w-6 h-6" />
                       </button>
                       <button onClick={() => delete_group(group._id)}>
-                        Delete
+                        <TrashIcon className="w-6 h-6" />
                       </button>
                     </div>
                   </div>
@@ -80,7 +81,7 @@ export default function GroupList() {
             })}
           </div>
           <button
-            className="border p-1 mx-1"
+            className="border rounded-lg w-full p-1"
             onClick={() => {
               setGroupClick({ name: "", _id: "" });
               setGroupHandleMode(true);

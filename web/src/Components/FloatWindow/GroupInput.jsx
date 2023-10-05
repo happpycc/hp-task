@@ -20,11 +20,11 @@ export default function InputWindow() {
         }}
       >
         <div
-          className="border p-2 overflow-y-scroll no-scrollbar w-auto bg-blue-900 flex flex-col gap-2"
+          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar flex flex-col gap-3 rounded-lg"
           onClick={(e) => e.stopPropagation()}
         >
           <input
-            className="outline-none resize-none p-1"
+            className="outline-none resize-none p-2 rounded-lg bg-[#734046]"
             value={groupClick.name}
             onChange={(e) =>
               setGroupClick((_groupClick) => ({
@@ -34,7 +34,7 @@ export default function InputWindow() {
             }
           />
           <button
-            className="border w-full"
+            className="border w-full rounded-lg"
             onClick={async () => {
               groupHandleMode ? await add_group() : await update_group();
               show_window({

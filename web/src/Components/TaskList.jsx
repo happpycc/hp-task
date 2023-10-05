@@ -31,7 +31,7 @@ const TaskList = () => {
         </div>
       )}
       {group.tasks.length !== 0 && (
-        <div className="h-full bg-red-300 mx-2 mb-2 rounded-lg p-2 overflow-y-auto no-scrollbar flex flex-col gap-2">
+        <div className="h-full p-2 overflow-y-auto no-scrollbar flex flex-col gap-2">
           {group.tasks.map((task, index) => {
             return <TaskItem key={task._id} index={index} task={task} />;
           })}

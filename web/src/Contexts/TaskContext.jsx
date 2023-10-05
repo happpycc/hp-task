@@ -37,8 +37,7 @@ export function TaskContextProvider({ children }) {
         if (res.status === 200) {
           setGroup((_group) => {
             _group.tasks.splice(taskClick.position, 0, res.data);
-            _group.update_time = res.data.update_time;
-            return { ..._group };
+            return { ..._group, update_time: res.data.update_time };
           });
           update_groups(res.data.update_time);
         }

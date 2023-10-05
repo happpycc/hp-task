@@ -18,11 +18,11 @@ export default function TaskInput() {
         }}
       >
         <div
-          className="border p-2 overflow-y-scroll no-scrollbar w-auto bg-blue-900 flex flex-col gap-2"
+          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar w-auto flex flex-col gap-3 rounded"
           onClick={(e) => e.stopPropagation()}
         >
           <input
-            className="outline-none resize-none p-1"
+            className="outline-none resize-none p-2 rounded-lg bg-[#734046]"
             value={taskClick.content}
             onChange={(e) =>
               setTaskClick((_taskClick) => ({
@@ -32,9 +32,9 @@ export default function TaskInput() {
             }
           />
           <button
-            className="border w-full"
+            className="border w-full rounded-lg"
             onClick={async () => {
-              add_task();
+              await add_task();
               show_window({
                 group_list: false,
                 group_input: false,
