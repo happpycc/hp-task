@@ -34,7 +34,8 @@ export const deleteTask = async (req, res) => {
     const GroupDoc = await GroupModel.findById(req.params.group_id);
     GroupDoc.tasks.pull(req.params.task_id);
     await GroupDoc.save();
-    res.status(200).send("Deleted a task successfully");
+    const update_time = Date.now();
+    res.status(200).send({ update_time });
   } catch (e) {
     console.log(e);
     res.status(500).send("Server error");
@@ -65,7 +66,7 @@ export const updateTaskState = async (req, res) => {
     const GroupDoc = await GroupModel.findById(req.params.id);
     GroupDoc.tasks.id(id).state = state;
     await GroupDoc.save();
-    res.status(200).json(GroupDoc.tasks.id(id));
+    res.status(200).json(GroupDoc.tasks.id(id).update_time);
   } catch (e) {
     res.status(500).send("Server error");
   }

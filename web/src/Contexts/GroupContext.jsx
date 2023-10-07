@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useContext } from "react";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
-import { ModeContext } from "./ModeContext";
 
 export const GroupContext = createContext({});
 
@@ -10,7 +8,6 @@ export function GroupContextProvider({ children }) {
   const [group, setGroup] = useState({ name: "", tasks: [] });
   const [groups, setGroups] = useState([]);
   const [groupClick, setGroupClick] = useState({ name: "", _id: "" });
-  const { show_window } = useContext(ModeContext);
   const get_group = async (_id) => {
     await axios
       .get(`/group/${_id}`)

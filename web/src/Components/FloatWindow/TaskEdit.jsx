@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { ModeContext } from "../../Contexts/ModeContext";
 import { TaskContext } from "../../Contexts/TaskContext";
 
-export default function TaskInput() {
-  const { taskInputMode, show_window } = useContext(ModeContext);
-  const { taskClick, setTaskClick, add_task } = useContext(TaskContext);
-  if (taskInputMode)
+export default function TaskEdit() {
+  const { taskEditMode, show_window } = useContext(ModeContext);
+  const { taskClick, setTaskClick, delete_task } = useContext(TaskContext);
+  if (taskEditMode)
     return (
       <div
         className="absolute right-0 left-0 bottom-0 top-0 m-auto w-full h-full bg-transparent flex justify-center items-center"
@@ -19,7 +19,7 @@ export default function TaskInput() {
         }}
       >
         <div
-          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar w-auto flex flex-col gap-3 rounded w-3/4"
+          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar w-3/4 flex flex-col gap-3 rounded"
           onClick={(e) => e.stopPropagation()}
         >
           <input
@@ -35,7 +35,7 @@ export default function TaskInput() {
           <button
             className="border w-full rounded-lg"
             onClick={async () => {
-              await add_task();
+              await delete_task();
               show_window({
                 group_list: false,
                 group_input: false,
@@ -44,7 +44,7 @@ export default function TaskInput() {
               });
             }}
           >
-            Add
+            Delete
           </button>
         </div>
       </div>

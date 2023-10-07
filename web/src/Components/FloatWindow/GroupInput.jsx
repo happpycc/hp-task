@@ -16,11 +16,12 @@ export default function InputWindow() {
             group_list: false,
             group_input: false,
             task_input: false,
+            task_edit: false,
           });
         }}
       >
         <div
-          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar flex flex-col gap-3 rounded-lg"
+          className="bg-[#321F28] p-3 overflow-y-scroll no-scrollbar flex flex-col gap-3 rounded-lg w-3/4"
           onClick={(e) => e.stopPropagation()}
         >
           <input
@@ -34,13 +35,14 @@ export default function InputWindow() {
             }
           />
           <button
-            className="border w-full rounded-lg"
+            className="border h-full rounded-lg"
             onClick={async () => {
               groupHandleMode ? await add_group() : await update_group();
               show_window({
                 group_list: false,
                 group_input: false,
                 task_input: false,
+                task_edit: false,
               });
             }}
           >

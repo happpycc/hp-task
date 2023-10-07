@@ -13,7 +13,6 @@ export function TaskContextProvider({ children }) {
     content: "",
     position: 0,
   });
-  const [taskUpdateText, setUpdateText] = useState("");
   const update_groups = (update_time) => {
     setGroups((_groups) => {
       _groups = _groups.filter((_group) => _group._id !== group._id);
@@ -46,8 +45,31 @@ export function TaskContextProvider({ children }) {
         console.log(err);
       });
   };
-  const delete_task = () => {};
+  const delete_task = async () => {
+    await axios.delete(`task/${group._id}/${taskClick.id}`).then((res) => {
+      if (res.status === 200) {
+        setGroup((_group) => {
+          _group.tasks = _group.tasks.filter(
+            (task) => task._id !== taskClick.id,
+          );
+          return { ..._group, update_time: res.data.update_time };
+        });
+        update_groups(res.data.update_time);
+      }
+    });
+  };
   const update_task = () => {};
+  const update_state = async (index, state, id) => {
+    await axios.put(`/task/state/${group._id}`, { id, state }).then((res) => {
+      setGroup((_group) => {
+        _group.tasks[index].state = state;
+        _group.tasks[index].update_time = res.data;
+        _group.update_time = res.data;
+        return { ..._group };
+      });
+      update_groups(res.data);
+    });
+  };
   const update_position = async (old_index, new_index, id) => {
     await axios
       .put(`/task/position/${group._id}`, {
@@ -57,7 +79,7 @@ export function TaskContextProvider({ children }) {
       .then((res) => {
         if (res.status === 200) {
           setGroup((_group) => {
-            let tasks = [...group.tasks];
+            let tasks = [..._group.tasks];
             tasks[old_index] = tasks.splice(new_index, 1, tasks[old_index])[0];
             return { ..._group, update_time: res.data.update_time, tasks };
           });
@@ -72,17 +94,15 @@ export function TaskContextProvider({ children }) {
   return (
     <TaskContext.Provider
       value={{
+        get_task,
         add_task,
         delete_task,
         update_task,
+        update_state,
         update_position,
-        get_task,
 
         taskClick,
         setTaskClick,
-
-        taskUpdateText,
-        setUpdateText,
       }}
     >
       {children}

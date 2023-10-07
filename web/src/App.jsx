@@ -5,7 +5,7 @@ import { GroupContextProvider } from "./Contexts/GroupContext";
 import { TaskContextProvider } from "./Contexts/TaskContext";
 
 const App = () => {
-  axios.defaults.baseURL = "http://192.168.1.11:5556";
+  axios.defaults.baseURL = "https://happpy.cc/api/task";
   return (
     <ModeContextProvider>
       <GroupContextProvider>

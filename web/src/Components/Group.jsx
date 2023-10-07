@@ -15,6 +15,7 @@ const TaskGroup = () => {
               group_list: false,
               group_input: true,
               task_input: false,
+              task_edit: false,
             });
             setGroupHandleMode(true);
           }}
@@ -30,6 +31,7 @@ const TaskGroup = () => {
               group_list: true,
               group_input: false,
               task_input: false,
+              task_edit: false,
             })
           }
           className="bg-[#395B64] mx-2 mt-2 rounded-lg p-2"

@@ -31,11 +31,12 @@ export default function GroupList() {
             group_list: false,
             group_input: false,
             task_input: false,
+            task_edit: false,
           })
         }
       >
         <div
-          className="p-3 bg-[#321F28] flex flex-col gap-1 h-2/3 w-2/3 justify-between rounded-lg items-center"
+          className="p-3 bg-[#321F28] flex flex-col gap-1 h-2/3 w-3/4 justify-between rounded-lg items-center"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col gap-2 overflow-y-scroll no-scrollbar w-full">
@@ -52,6 +53,7 @@ export default function GroupList() {
                           group_list: false,
                           group_input: false,
                           task_input: false,
+                          task_edit: false,
                         });
                       }}
                     >
@@ -66,6 +68,7 @@ export default function GroupList() {
                             group_list: false,
                             group_input: true,
                             task_input: false,
+                            task_edit: false,
                           });
                         }}
                       >
@@ -89,6 +92,7 @@ export default function GroupList() {
                 group_list: false,
                 group_input: true,
                 task_input: false,
+                task_edit: false,
               });
             }}
           >

@@ -7,10 +7,12 @@ import { TaskContext } from "../Contexts/TaskContext";
 const TaskList = () => {
   const { group, groups } = useContext(GroupContext);
   const { show_window } = useContext(ModeContext);
-  const { setTaskClick, setTaskUpdateText } = useContext(TaskContext);
+  const { setTaskClick } = useContext(TaskContext);
   if (groups.length === 0)
     return (
-      <div className="h-full mx-2 mb-2 rounded-lg p-2 bg-[#040D12]">None</div>
+      <div className="h-full mx-2 mb-2 rounded-lg p-2 bg-[#040D12] text-white">
+        None
+      </div>
     );
   return (
     <>
@@ -19,10 +21,12 @@ const TaskList = () => {
           <div
             onClick={() => {
               setTaskClick({ content: "", position: 0 });
+
               show_window({
                 group_list: false,
                 group_input: false,
                 task_input: true,
+                task_edit: false,
               });
             }}
           >
