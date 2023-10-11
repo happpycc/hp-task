@@ -4,7 +4,8 @@ import { TaskContext } from "../../Contexts/TaskContext";
 
 export default function TaskEdit() {
   const { taskEditMode, show_window } = useContext(ModeContext);
-  const { taskClick, setTaskClick, delete_task } = useContext(TaskContext);
+  const { taskClick, setTaskClick, delete_task, update_content } =
+    useContext(TaskContext);
   if (taskEditMode)
     return (
       <div
@@ -32,6 +33,20 @@ export default function TaskEdit() {
               }))
             }
           />
+          <button
+            className="border w-full rounded-lg"
+            onClick={async () => {
+              await update_content();
+              show_window({
+                group_list: false,
+                group_input: false,
+                task_input: false,
+                task_edit: false,
+              });
+            }}
+          >
+            Update
+          </button>
           <button
             className="border w-full rounded-lg"
             onClick={async () => {

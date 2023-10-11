@@ -57,7 +57,7 @@ const TaskItem = ({ index, task }) => {
       <div className="flex w-full justify-center items-center overflow-x-scroll pl-1.5">
         <button
           onClick={() => {
-            setTaskClick({ content: task.content, id: task._id });
+            setTaskClick({ content: task.content, id: task._id, index: index });
             show_window({
               group_list: false,
               group_input: false,

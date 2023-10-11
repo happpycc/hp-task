@@ -12,6 +12,7 @@ export function TaskContextProvider({ children }) {
     id: "",
     content: "",
     position: 0,
+    index: 0,
   });
   const update_groups = (update_time) => {
     setGroups((_groups) => {
@@ -58,7 +59,22 @@ export function TaskContextProvider({ children }) {
       }
     });
   };
-  const update_task = () => {};
+  const update_content = async () => {
+    await axios
+      .put(`/task/content/${group._id}`, {
+        content: taskClick.content,
+        id: taskClick.id,
+      })
+      .then((res) => {
+        setGroup((_group) => {
+          _group.tasks[taskClick.index].content = res.data.content;
+          _group.tasks[taskClick.index].update_time = res.data.update_time;
+          _group.update_time = res.data.update_time;
+          return { ..._group };
+        });
+        update_groups(res.data.update_time);
+      });
+  };
   const update_state = async (index, state, id) => {
     await axios.put(`/task/state/${group._id}`, { id, state }).then((res) => {
       setGroup((_group) => {
@@ -97,7 +113,7 @@ export function TaskContextProvider({ children }) {
         get_task,
         add_task,
         delete_task,
-        update_task,
+        update_content,
         update_state,
         update_position,
 
