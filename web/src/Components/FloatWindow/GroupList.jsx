@@ -11,16 +11,17 @@ export default function GroupList() {
   const { groupListMode, setGroupHandleMode, show_window } =
     useContext(ModeContext);
   useEffect(() => {
-    axios
-      .get("/groups")
-      .then((res) => {
-        if (res.status === 200) {
-          setGroups(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    groupListMode === true &&
+      axios
+        .get("/groups")
+        .then((res) => {
+          if (res.status === 200) {
+            setGroups(res.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }, [groupListMode]);
   if (groupListMode)
     return (

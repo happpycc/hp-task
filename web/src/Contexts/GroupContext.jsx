@@ -27,6 +27,7 @@ export function GroupContextProvider({ children }) {
         if (res.status === 200) {
           setGroup(res.data);
           setGroups((groups) => [res.data, ...groups]);
+          localStorage.setItem("group_id", _id);
         }
       })
       .catch((err) => {
